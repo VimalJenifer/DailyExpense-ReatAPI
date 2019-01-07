@@ -2,19 +2,29 @@ package com.dailyExpense.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-@Entity
+//@Entity
 public class DailyExpense {
 	
-	@Id
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+//	@OneToOne
 	private User user;
 	
+//	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.EAGER, mappedBy= "expense")
 	private List<Expense> expense;
 	
+//	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.EAGER, mappedBy= "expense")
 	private List<Income> income;
 	
 	public Long getId() {

@@ -3,28 +3,34 @@ package com.dailyExpense.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-//@Entity
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name= "dailyexpense")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DailyExpense {
 	
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="dailyexpenseid")
 	private Long id;
 	
-//	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
 	
-//	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.EAGER, mappedBy= "expense")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyexpense")
 	private List<Expense> expense;
 	
-//	@OneToMany(cascade=CascadeType.ALL, fetch= FetchType.EAGER, mappedBy= "expense")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyincome")
 	private List<Income> income;
 	
 	public Long getId() {
@@ -58,7 +64,4 @@ public class DailyExpense {
 	public void setIncome(List<Income> income) {
 		this.income = income;
 	}
-	
-	
-
 }

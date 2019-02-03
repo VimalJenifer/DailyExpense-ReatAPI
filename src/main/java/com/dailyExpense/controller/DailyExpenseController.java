@@ -35,8 +35,6 @@ public class DailyExpenseController {
 	
 	@PostMapping("/addExpense")
 	public String addExpense(@RequestBody DailyExpense dailyExpense) {
-//		System.out.println(dailyExpense.getExpense().get(0).getCategory());
-//		System.out.println(dailyExpense.getUser().getUserId());
 		expenseService.addExpense(dailyExpense);
 		return "true";
 	}

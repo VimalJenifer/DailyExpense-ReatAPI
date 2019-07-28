@@ -1,8 +1,9 @@
 package com.dailyExpense.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dailyExpense.model.DailyExpense;
+import com.dailyExpense.model.Expense;
 import com.dailyExpense.model.User;
 import com.dailyExpense.service.DailyExpenseService;
 
@@ -20,8 +22,10 @@ public class DailyExpenseController {
 	@Autowired
 	DailyExpenseService expenseService;
 	
-	@GetMapping("/Register")
-	public String Register(@ModelAttribute("user") User user) {
+	@PostMapping("/Register")
+	public String Register(@RequestBody User user) {
+		System.out.println(user.toString());
+		expenseService.addUser(user);
 		return "hello";		
 	}
 	
@@ -37,5 +41,10 @@ public class DailyExpenseController {
 	public String addExpense(@RequestBody DailyExpense dailyExpense) {
 		expenseService.addExpense(dailyExpense);
 		return "true";
+	}
+	
+	@GetMapping("/getExpenseOption")
+	public List<Expense> getExpenseOption() {
+		return expenseService.getExpenseOption();
 	}
 }

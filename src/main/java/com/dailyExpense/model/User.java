@@ -6,8 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="user")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 	
 	@Id
@@ -19,8 +22,6 @@ public class User {
 	private String email;
 	
 	private String password;
-	
-	private String password1;
 	
 	public Long getId() {
 		return id;
@@ -53,13 +54,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getPassword1() {
-		return password1;
-	}
-	
-	public void setPassword1(String password1) {
-		this.password1 = password1;
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userId=" + userId + ", email=" + email + ", password=" + password + "]";
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,7 @@ public class DailyExpense {
 	@OneToOne(cascade=CascadeType.ALL)
 	private User user;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyexpense")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyexpense", fetch= FetchType.EAGER)
 	private List<Expense> expense;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyincome")

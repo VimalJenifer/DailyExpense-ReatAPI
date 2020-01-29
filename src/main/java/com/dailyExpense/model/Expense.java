@@ -5,36 +5,40 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="expense")
-@JsonIgnoreType
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Expense {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long eId;
 	
 	private String category;
 	
-	private String description;
+	private String activity;
 	
 	private String amount;
 	
-	@ManyToOne(optional= false)
-	@JoinColumn(name= "dailyexpenseid")
-	private DailyExpense dailyexpense;
-	
-	public Long getId() {
-		return id;
+	@OneToOne
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name="user_id")
+	private User user;
+
+	public Long geteId() {
+		return eId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void seteId(Long eId) {
+		this.eId = eId;
 	}
 
 	public String getCategory() {
@@ -45,12 +49,12 @@ public class Expense {
 		this.category = category;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getActivity() {
+		return activity;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setActivity(String activity) {
+		this.activity = activity;
 	}
 
 	public String getAmount() {
@@ -61,13 +65,21 @@ public class Expense {
 		this.amount = amount;
 	}
 
-	public DailyExpense getDailyexpense() {
-		return dailyexpense;
+	public User getUser() {
+		return user;
 	}
 
-	public void setDailyexpense(DailyExpense dailyexpense) {
-		this.dailyexpense = dailyexpense;
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Expense [eId=" + eId + ", category=" + category + ", activity=" + activity + ", amount=" + amount
+				+ ", user=" + user + "]";
 	}
 
 	
+	
+
 }

@@ -5,9 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="income")
 public class Income {
@@ -18,14 +21,14 @@ public class Income {
 	
 	private String category;
 	
-	private String description;
+	private String activity;
 	
 	private String amount;
 	
-	@ManyToOne(optional= false)
-	@JoinColumn(name="dailyexpenseid")
-	private DailyExpense dailyincome;
-	
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+
 	public Long getId() {
 		return id;
 	}
@@ -42,12 +45,12 @@ public class Income {
 		this.category = category;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getActivity() {
+		return activity;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setActivity(String activity) {
+		this.activity = activity;
 	}
 
 	public String getAmount() {
@@ -58,15 +61,21 @@ public class Income {
 		this.amount = amount;
 	}
 
-	public DailyExpense getDailyincome() {
-		return dailyincome;
+	public User getUser() {
+		return user;
 	}
 
-	public void setDailyincome(DailyExpense dailyincome) {
-		this.dailyincome = dailyincome;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Income [id=" + id + ", category=" + category + ", activity=" + activity + ", amount=" + amount
+				+ ", user=" + user + "]";
+	}
 	
 	
+
 
 }

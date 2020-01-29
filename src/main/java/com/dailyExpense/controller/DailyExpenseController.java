@@ -2,12 +2,14 @@ package com.dailyExpense.controller;
 
 import java.util.List;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dailyExpense.model.DailyExpense;
@@ -23,18 +25,21 @@ public class DailyExpenseController {
 	DailyExpenseService expenseService;
 	
 	@PostMapping("/Register")
-	public String Register(@RequestBody User user) {
-		System.out.println(user.toString());
-		expenseService.addUser(user);
-		return "hello";		
+	public Response Register(@RequestBody User user) {
+		expenseService.addUser(user);		
+		return Response.ok().build();		
 	}
 	
-//	@CrossOrigin(origins="http://localhost:9000")
-	@GetMapping("/Register1")
-	public String Register(@RequestParam(value="name", defaultValue="world") String name) {
-		System.out.println("vimal");
-//		return Response.ok("hello").header("Access-Control-Allow-Origin", "*").build();
-		return "hello";		
+	@PostMapping("/Login")
+	public Response Login(@RequestBody User user) {
+		DailyExpense dailyExpense = expenseService.loginUser(user);
+		return Response.status(Response.Status.OK).entity(dailyExpense).type(MediaType.APPLICATION_JSON).build();
+	}
+	
+	@PostMapping("/addNewExpense")
+	public String addNewExpense(@RequestBody Expense expense) {
+		expenseService.addNewExpense(expense);
+		return "true";
 	}
 	
 	@PostMapping("/addExpense")
@@ -44,7 +49,7 @@ public class DailyExpenseController {
 	}
 	
 	@GetMapping("/getExpenseOption")
-	public List<Expense> getExpenseOption() {
-		return expenseService.getExpenseOption();
+	public List<Expense> getExpenseOption(@RequestBody User user) {
+		return expenseService.getExpenseOptionByUserId(user);
 	}
 }

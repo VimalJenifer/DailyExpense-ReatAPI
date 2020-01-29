@@ -10,8 +10,12 @@ public interface DailyExpenseRepository {
 	
 	public void addUser(User user);
 	
+	public DailyExpense loginUser(User user);
+	
+	public boolean addNewExpense(Expense expense);
+	
 	public void addExpense(DailyExpense dailyExpense);
 	
-	public List<Expense> getExpenseOption();
+	public List<Expense> getExpenseOptionByUserId(User user);
 
 }

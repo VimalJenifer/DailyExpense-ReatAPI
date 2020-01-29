@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "503e5ee8-6f13-4916-8c6d-14ccab600614",
+		"name": "DailyExpense-RestAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":\"Vimal\",\n\t\"email\":\"Vimal\",\n\t\"password\":\"Vimal\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/DailyExpense/Register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"DailyExpense",
+						"Register"
+					]
+				},
+				"description": "Register user to DailyExpense"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":\"Vimal\",\n\t\"password\":\"Vima1l\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/DailyExpense/Login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"DailyExpense",
+						"Login"
+					]
+				},
+				"description": "Login user"
+			},
+			"response": []
+		}
+	]
+}

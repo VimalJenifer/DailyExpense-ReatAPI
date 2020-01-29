@@ -1,15 +1,11 @@
 package com.dailyExpense.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,14 +21,26 @@ public class DailyExpense {
 	@Column(name="dailyexpenseid")
 	private Long id;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name="user_id")
 	private User user;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyexpense", fetch= FetchType.EAGER)
-	private List<Expense> expense;
+	@Column(name="transactionType")
+	private String transactionType;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="dailyincome")
-	private List<Income> income;
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="amount")
+	private Double amount;
+	
+	@OneToOne
+	@JoinColumn(name="expense_id")
+	private Expense expense;
+	
+	@OneToOne
+	@JoinColumn(name="income_id")
+	private Income income;
 	
 	public Long getId() {
 		return id;
@@ -50,19 +58,45 @@ public class DailyExpense {
 		this.user = user;
 	}
 
-	public List<Expense> getExpense() {
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public Expense getExpense() {
 		return expense;
 	}
 
-	public void setExpense(List<Expense> expense) {
+	public void setExpense(Expense expense) {
 		this.expense = expense;
 	}
 
-	public List<Income> getIncome() {
+	public Income getIncome() {
 		return income;
 	}
 
-	public void setIncome(List<Income> income) {
+	public void setIncome(Income income) {
 		this.income = income;
 	}
+
+
 }

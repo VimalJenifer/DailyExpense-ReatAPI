@@ -25,6 +25,16 @@ public class DailyExpenseServiceImpl implements DailyExpenseService {
 	public void addUser(User user) {
 		dailyExpenseRepository.addUser(user);		
 	}
+	
+	@Override
+	public DailyExpense loginUser(User user) {
+		return dailyExpenseRepository.loginUser(user);
+	}
+	
+	@Override
+	public boolean addNewExpense(Expense expense) {
+		return dailyExpenseRepository.addNewExpense(expense);
+	}
 
 	@Override
 	public void addExpense(DailyExpense dailyExpense) {
@@ -32,8 +42,8 @@ public class DailyExpenseServiceImpl implements DailyExpenseService {
 	}
 	
 	@Override
-	public List<Expense> getExpenseOption() {
-		return dailyExpenseRepository.getExpenseOption();
+	public List<Expense> getExpenseOptionByUserId(User user) {
+		return dailyExpenseRepository.getExpenseOptionByUserId(user);
 	}
 
 	
